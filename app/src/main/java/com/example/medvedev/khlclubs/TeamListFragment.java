@@ -1,5 +1,6 @@
 package com.example.medvedev.khlclubs;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.speech.SpeechRecognizer;
 import android.support.annotation.Nullable;
@@ -10,6 +11,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.List;
 
@@ -34,7 +36,8 @@ public class TeamListFragment extends Fragment {
         return view;
     }
 
-    private class TeamHolder extends RecyclerView.ViewHolder {
+    private class TeamHolder extends RecyclerView.ViewHolder
+            implements View.OnClickListener {
         private SportTeam mSportTeam;
         private TextView mNameTextView;
         private TextView mCityTextView;
@@ -42,6 +45,8 @@ public class TeamListFragment extends Fragment {
 
         public TeamHolder(View itemView) {
             super(itemView);
+
+            itemView.setOnClickListener(this);
 
             mNameTextView = (TextView)itemView.findViewById(R.id.list_item_team_name);
             mCityTextView = (TextView)itemView.findViewById(R.id.list_item_team_city);
@@ -53,6 +58,14 @@ public class TeamListFragment extends Fragment {
             mNameTextView.setText(sportTeam.getName());
             mCityTextView.setText(sportTeam.getCity());
             mYearTextView.setText(Integer.toString(sportTeam.getEstimateYear()));
+        }
+
+        @Override
+        public void onClick(View view) {
+            //Toast.makeText(getActivity(), "Клик", Toast.LENGTH_SHORT).show();
+
+            Intent intent = new Intent(getActivity(), TeamActivity.class);
+            startActivity(intent);
         }
     }
 
