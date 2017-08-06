@@ -7,21 +7,26 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import java.util.UUID;
+
 /**
  * Created by medvedev on 28.07.2017.
  */
 
 public class TeamFragment extends Fragment {
+
+    private static final String ARG_TEAM_ID = "team_id";
+
     private SportTeam mSportTeam;
     private TextView mTextView;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mSportTeam = new SportTeam();
-        mSportTeam.setName("Salavat Yulaev");
-        mSportTeam.setCity("Ufa");
-        mSportTeam.setEstimateYear(1961);
+        //mSportTeam = new SportTeam();
+
+        UUID teamId = (UUID) getArguments().getSerializable(ARG_TEAM_ID);
+        mSportTeam = TeamsPool.get(getActivity()).getTeam(teamId);
     }
 
     @Override
@@ -38,5 +43,14 @@ public class TeamFragment extends Fragment {
         mTextView.setText(Integer.toString(mSportTeam.getEstimateYear()));
 
         return v;
+    }
+
+    public static TeamFragment newInstance(UUID teamId) {
+        Bundle args = new Bundle();
+        args.putSerializable(ARG_TEAM_ID, teamId);
+
+        TeamFragment fragment = new TeamFragment();
+        fragment.setArguments(args);
+        return fragment;
     }
 }

@@ -64,7 +64,10 @@ public class TeamListFragment extends Fragment {
         public void onClick(View view) {
             //Toast.makeText(getActivity(), "Клик", Toast.LENGTH_SHORT).show();
 
-            Intent intent = new Intent(getActivity(), TeamActivity.class);
+            //Intent intent = new Intent(getActivity(), TeamActivity.class);
+
+            //Intent intent = TeamActivity.newIntent(getActivity(), mSportTeam.getID());
+            Intent intent = TeamPagerActivity.newIntent(getActivity(), mSportTeam.getID());
             startActivity(intent);
         }
     }
