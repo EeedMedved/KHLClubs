@@ -13,7 +13,11 @@ public class SportTeam {
     private int mEstimateYear;
 
     public SportTeam() {
-        mUUID = UUID.randomUUID();
+        this(UUID.randomUUID());
+    }
+
+    public SportTeam(UUID uuid) {
+        mUUID = uuid;
     }
 
     public String getName() {
